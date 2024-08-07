@@ -29,10 +29,11 @@ Route::view('card-check/stripe/gate-1', 'gate1')->name('gate1');
 
 Route::name('admin.')->prefix('admin')->group(function () {
     Route::get('voucher', App\Livewire\admin\Vouchers::class)->name('voucher');
-    Route::view('service', 'admin-service')->name('service');
-    });
+    // Route::view('service', 'admin-service')->name('service');
+    Route::get('services', App\Livewire\Admin\Service::class)->name('service');
+});
 
 
-    
+
 
 require __DIR__.'/auth.php';

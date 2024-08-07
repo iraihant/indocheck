@@ -5,7 +5,7 @@ import 'simplebar/dist/simplebar.css';
 import Swal from 'sweetalert2';
 
 
-document.addEventListener('voucherRedeem', event => {
+document.addEventListener('Notifier', event => {
     Swal.fire({
         title: event.detail.title,
         text: event.detail.text,
@@ -14,4 +14,3 @@ document.addEventListener('voucherRedeem', event => {
       });
   });
 
-  

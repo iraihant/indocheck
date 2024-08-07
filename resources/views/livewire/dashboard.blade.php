@@ -18,16 +18,7 @@
           <div class="p-6">
               <h3 class="card-title">Redeem Voucher</h3>
                <div class="mt-5">
-                  @if(session('success'))
-                  <div class="bg-success/10 text-success   border border-success/20 text-sm rounded-md py-3 px-5" role="alert">
-                     <span class="font-bold">Success</span> - {{ session('success') }}
-                  </div>
-                  @elseif(session('error'))
-                  <div class="bg-danger/10 text-danger border border-danger/20 text-sm rounded-md py-3 px-5" role="alert">
-                     <span class="font-bold">Error</span> - {{ session('error') }}
-                  </div>
-                  @endif
-                  <x-input-error :messages="$errors->all()" class="mt-2" />
+                
                   <form wire:submit='redeemVoucher' class="mt-2">
                      <div class="flex flex-col">
                         <div class="mb-5">

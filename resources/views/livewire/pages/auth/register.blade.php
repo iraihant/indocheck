@@ -20,19 +20,34 @@ new #[Layout('layouts.guest')] class extends Component
      */
     public function register(): void
     {
-        $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-        ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+        try {
+            $validated = $this->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            ]);
 
-        event(new Registered($user = User::create($validated)));
+            $validated['password'] = Hash::make($validated['password']);
 
-        Auth::login($user);
+            event(new Registered($user = User::create($validated)));
 
-        $this->redirect(route('dashboard'));
+            $this->dispatch('Notifier',
+                title: 'Success!',
+                text: 'Successfully register!, you will be redirected to the dashboard page!',
+                icon: 'success',
+            );
+
+            Auth::login($user);
+
+            $this->redirect(route('dashboard'));
+        } catch (\Exception $e) {
+            $this->dispatch('Notifier',
+            title: 'Error!',
+            text: $e->validator->errors()->all(),
+            icon: 'error',);
+        }
+        
     }
 }; ?>
 

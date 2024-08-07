@@ -1,31 +1,14 @@
 <div class="flex flex-col gap-4">
     <div class="w-full lg:w-2/4 md:w-2/4">
-        @if(session('error'))
-        <div id="error" class="border bg-danger/10 text-danger border-danger/20 rounded py-3 px-5 flex justify-between items-center">
-            <p>
-                <span class="font-bold">Error  </span> {{ session('error') }}!
-            </p>
-            <button class="text-xl/[0]" data-fc-dismiss="error" type="button">
-                <i class="ri-close-line text-xl"></i>
-            </button> <!-- button end -->
-        </div>
-
-    @endif
-    @if(session('success'))
-    <div class="bg-success/10 text-success   border border-success/20 text-sm rounded-md py-3 px-5" role="alert">
-        <span class="font-bold">Success</span> - {{ session('success') }}
-    </div>
-    @endif
-    <x-input-error :messages="$errors->all()" class="mt-2" />
 
         <div class="card mt-4">
             <div class="p-6">
                 <h3 class="card-title"> Create Voucher</h3>
                 <div class="pt-5">
-                    {{-- <form wire:submit='submit_service'>
+                    <form wire:submit='save'>
                         <div class="mb-3">
                             <label for="service" class="mb-2">Service</label>
-                            <select class="form-select" id="service" name="service" wire:model='serviceSelect'>
+                            <select class="form-select" id="service" name="service" wire:model='form.serviceItem'>
                                 <option value="" selected>-- SELECT SERVICE --</option>
                                 @foreach ($service as $s)
                                     <option value="{{ $s->id }}">{{ $s->service_name }} Cree</option>
@@ -34,10 +17,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="qty" class="mb-2">Qty</label>
-                            <input type="number" class="form-input" id="qty" wire:model='qty'>
+                            <input type="number" class="form-input" id="qty" wire:model='form.qty'>
                         </div>
                         <button type="submit" class="btn bg-primary text-white" wire:loading.attr='disabled'>Submit</button> <!-- end button -->
-                    </form> <!-- end form --> --}}
+                    </form> <!-- end form -->
                 </div>
             </div>
         </div>
@@ -75,22 +58,25 @@
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
-                                                {{-- @foreach ($vouchers as $vocUnRed)
-                                                    @if($vocUnRed->redeemed_at == null)
+                                                @foreach ($VocU as $vocUnRed)
+                                                    
                                                     <tr>
                                                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200">{{$vocUnRed->created_at}}</td>
                                                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $vocUnRed->code }}</td>
                                                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $vocUnRed->metadata['credits'] }} Credits</td>
                                                     </tr>
 
-                                                    @endif
-                                                @endforeach --}}
+                                                   
+                                                @endforeach
 
 
 
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="mt-4">
+                                        {{ $VocU->links() }}
+                                   </div>
                                 </div>
                             </div>
                         </div> <!-- bar-with-underline-1 end -->
@@ -108,23 +94,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-
-                                                {{-- @foreach ($vouchers as $vocUnRed)
-                                                    @if($vocUnRed->redeemed_at != null)
+                                                
+                                                @foreach ($VocR as $vocRed)
+                                                    
                                                     <tr>
-                                                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200">{{$vocUnRed->created_at}}</td>
-                                                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $vocUnRed->code }}</td>
-                                                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $vocUnRed->metadata['credits'] }} Credits</td>
+                                                        <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200">{{$vocRed->created_at}}</td>
+                                                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $vocRed->code }}</td>
+                                                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $vocRed->metadata['credits'] }} Credits</td>
                                                     </tr>
 
-                                                    @endif
-                                                @endforeach --}}
+                                                    
+                                                @endforeach
 
 
 
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="mt-4">
+                                        {{ $VocR->links() }}
+                                   </div>
                                 </div>
                             </div>
                         </div> <!-- bar-with-underline-2 end -->

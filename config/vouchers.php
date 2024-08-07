@@ -19,7 +19,7 @@ return [
      *
      * Ex: ***-**-***
      */
-    'mask' => '****-****',
+    'mask' => '****-****-****',
 
     /*
      * Code prefix.
@@ -27,7 +27,7 @@ return [
      *
      * Ex. FOO-1234-5678
      */
-    'prefix' => null,
+    'prefix' => 'IDXV',
 
     /*
      * Code suffix.

@@ -14,13 +14,28 @@ new #[Layout('layouts.guest')] class extends Component
      */
     public function login(): void
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-        $this->form->authenticate();
+            $this->form->authenticate();
 
-        Session::regenerate();
+            $this->dispatch('Notifier',
+                title: 'Success!',
+                text: 'Successfully login!, you will be redirected to the dashboard page!',
+                icon: 'success',
+            );
+            Session::regenerate();
+    
+            $this->redirectIntended(default: route('dashboard'));
+        } catch (\Exception $e) {
+            $this->dispatch('Notifier',
+            title: 'Error!',
+            text: $e->validator->errors()->all(),
+            icon: 'error',);
+        }
+       
 
-        $this->redirectIntended(default: route('dashboard'));
+        
     }
 }; ?>
 

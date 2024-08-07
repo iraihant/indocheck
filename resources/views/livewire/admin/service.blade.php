@@ -44,7 +44,7 @@
                                         <tr>
                                             <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200">{{$ser->service_name}}</td>
                                             <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $ser->price }}</td>
-                                            <td class="px-4 py-4 whitespace-nowrap text-sm uppercase {{ ($ser->status == false) ? ' text-danger' : 'text-success' }}">{{ ($ser->status == false) ? 'INACTIVE' : 'ACTIVE' }}</td>
+                                            <td class="px-4 py-2 my-auto mt-2 whitespace-nowrap text-sm uppercase text-white btn  {{ ($ser->status == false) ? ' bg-danger' : 'bg-success' }}">{{ ($ser->status == false) ? 'INACTIVE' : 'ACTIVE' }}</td>
                                             <td class="whitespace-nowrap text-sm dark:text-gray-200">
                                                 <button  type="button" wire:click='ChangeService({{ $ser->id }})' class="btn {{ ($ser->status == true) ?"bg-danger" : "bg-success"}} text-white rounded-full">
 

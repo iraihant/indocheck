@@ -32,6 +32,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $guarded = ['balance'];
+
     /**
      * Get the attributes that should be cast.
      *

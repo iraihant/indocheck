@@ -28,5 +28,7 @@
 
         </div>
         <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+        <script src="{{ asset('build/assets/@frostui/tailwindcss/dist/frostui.js') }}"></script>
+
     </body>
 </html>

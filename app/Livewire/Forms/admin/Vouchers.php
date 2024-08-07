@@ -8,8 +8,6 @@ use Illuminate\Validation\ValidationException;
 
 use App\Models\Service;
 use FrittenKeeZ\Vouchers\Facades\Vouchers as Vocs;
-use FrittenKeeZ\Vouchers\Models\Voucher;
-use FrittenKeeZ\Vouchers\Models\VoucherEntity;
 
 class Vouchers extends Form
 {

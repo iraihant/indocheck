@@ -15,6 +15,7 @@ Route::get('dashboard', App\Livewire\Dashboard::class)
 
 Route::get('/transaction/deposit', App\Livewire\transaction\Deposit::class)->name('trans_depo');
 Route::get('/transaction/{trx_id}/payment', App\Livewire\transaction\Payment::class)->name('trans_payment');
+Route::get('/transaction/history', App\Livewire\transaction\History::class)->name('trans_history');
 
 
 Route::view('card-check/stripe/gate-1', 'gate1')->name('gate1');

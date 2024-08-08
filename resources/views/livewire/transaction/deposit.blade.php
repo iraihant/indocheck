@@ -22,7 +22,7 @@
                             <div class="mb-3">
                                 <label for="price" class="mb-2">Price</label>
                                 <span class="block text-lg px-5">Rp {{ number_format($price, 0, ',', '.') }}</span>
-    
+
                             </div>
                             <div class="mb-3">
                                 <label for="payment" class="col-md-3 col-form-label">Payment</label>
@@ -34,9 +34,9 @@
                                         </label>
                                         {{-- @error('paymentMethod') <span class="text-danger">{{ $message }}</span> @enderror --}}
                                     </div>
-                                    
+
                                 </div>
-    
+
                             </div>
                             <button type="submit" class="btn bg-primary text-white w-full" wire:loading.attr='disabled'>Deposit Now</button> <!-- end button -->
                         </form> <!-- end form -->
@@ -48,8 +48,8 @@
             <div class="card mt-4">
                 <div class="p-6">
                     <h3 class="card-title"></h3>
-                    <h4 class="text-center text-muted text-bold text-uppercase text-lg mb-2"> How to Top Up Credits ?</h4>
-                    <ol class="list-decimal list-inside" role="list">
+                    <h4 class="text-center text-muted text-bold text-uppercase text-lg mb-2 dark:text-white"> How to Top Up Credits ?</h4>
+                    <ol class="list-decimal list-inside dark:text-gray-200" role="list">
                         <li>Choose credit amount.</li>
                         <li>Select the payment method (QRIS).</li>
                         <li>Click "Deposit Now."</li>

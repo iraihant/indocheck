@@ -76,7 +76,7 @@
                         </li>
 
                         <li class="menu-item">
-                            <a href="javas" wire:navigate class="menu-link">
+                            <a href="{{ route('trans_history') }}" wire:navigate class="menu-link">
                                 <span class="menu-text">History</span>
                             </a>
                         </li>

@@ -6,19 +6,19 @@
               <h3 class="card-title">Time</h3>
               <div class="flex items-center">
                   <div x-data="clockComponent()" x-init="init()" class="mx-auto">
-                     <h1 class="text-5xl my-3 py-0.5 text-center" x-text="time"></h1>
+                     <h1 class="text-5xl my-3 py-0.5 text-center dark:text-gray-100" x-text="time"></h1>
                      <h1 class="text-lg my-3 py-0.5 text-center" x-text="date"></h1>
                </div>
               </div>
           </div>
           <!-- end p-6 -->
       </div>
-   
+
       <div class="card">
           <div class="p-6">
               <h3 class="card-title">Redeem Voucher</h3>
                <div class="mt-5">
-                
+
                   <form wire:submit='redeemVoucher' class="mt-2">
                      <div class="flex flex-col">
                         <div class="mb-5">
@@ -33,7 +33,7 @@
           </div> <!-- end row-->
       </div> <!-- end p-6 -->
    </div> <!-- end card -->
-   
+
    <div class="grid gap-6 mb-6">
       <div class="card">
           <div class="card-header flex justify-between items-center">
@@ -46,10 +46,10 @@
                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                            <thead>
                                <tr>
-                                   <th scope="col" class="px-4 py-4 text-start text-sm font-medium text-gray-500">Redeem Date</th>
-                                   <th scope="col" class="px-4 py-4 text-start text-sm font-medium text-gray-500">Voucher Code</th>
-                                   <th scope="col" class="px-4 py-4 text-start text-sm font-medium text-gray-500">Service</th>
-           
+                                   <th scope="col" class="px-4 py-4 text-start text-sm font-medium text-gray-500 dark:text-gray-300">Redeem Date</th>
+                                   <th scope="col" class="px-4 py-4 text-start text-sm font-medium text-gray-500 dark:text-gray-300">Voucher Code</th>
+                                   <th scope="col" class="px-4 py-4 text-start text-sm font-medium text-gray-500 dark:text-gray-300">Service</th>
+
                                </tr>
                            </thead>
                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -62,12 +62,12 @@
                                {{ $date_formatted }}</td>
                                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $voc->voucher->code }}</td>
                                    <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $voc->voucher->metadata['credits'] }} Credits</td>
-           
+
                                </tr>
                                @endforeach
-           
-           
-           
+
+
+
                            </tbody>
                        </table>
                        <div class="mt-4">
@@ -76,16 +76,16 @@
                    </div>
                </div>
            </div>
-           
+
         </div>
-   
+
       </div>
    </div>
 </div>
 <script>
-   
+
    function clockComponent() {
-      
+
       return {
             time: '',
             date: '',

@@ -13,7 +13,7 @@ class Deposit extends Component
 {
     public $price = null;
     // public $selectedService = null;
-    
+
     #[Validate('required|numeric|exists:services,id')]
     public $selectedService;
 
@@ -28,7 +28,7 @@ class Deposit extends Component
     }
 
     public function save(){
-            
+
         try{
             $this->validate();
             if($this->paymentMethod == false){
@@ -37,13 +37,13 @@ class Deposit extends Component
                 text: "The payment method field is required.",
                 icon: 'error',);
                 return;
-                
+
             }
             $CekStatusTrans = Transaction::where('user_id', Auth::id())->where('status', 0)->exists();
             if($CekStatusTrans){
                 $this->dispatch('Notifier',
                 title: 'Error!',
-                text: "There seems to be an unfinished transaction, please complete the transaction in progress!",
+                text: "You have an unresolved transaction. Please settle it before continuing.",
                 icon: 'error',);
                 return;
             }
@@ -58,7 +58,7 @@ class Deposit extends Component
             }
 
             $ser = Service::find($this->selectedService);
-            
+
             $clo = now();
             $clo = str_replace('-',"",$clo);
             $clo2 =  explode(' ',$clo);
@@ -92,7 +92,7 @@ class Deposit extends Component
             text: $e->validator->errors()->all(),
             icon: 'error',);
         }
-        
+
     }
 
     public function render()

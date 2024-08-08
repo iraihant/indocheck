@@ -23,14 +23,14 @@ new class extends Component
         <a href="/" class="logo-box">
             <!-- Light Logo -->
             <div class="logo-light">
-                <img src="{{ asset('build/assets/images/logo.png') }}" class="logo-lg h-[22px]" alt="Light logo">
-                <img src="{{ asset('build/assets/images/logo-sm.png') }}" class="logo-sm h-[22px]" alt="Small logo">
+                <img src="{{ asset('images/logo.png') }}" class="logo-lg h-[22px]" id="logo-light"  alt="Light logo">
+                <img src="{{ asset('images/logo-sm.png') }}" class="logo-sm h-[22px]" id="logo-light-sm" alt="Small logo">
             </div>
 
             <!-- Dark Logo -->
             <div class="logo-dark">
-                <img src="{{ asset('build/assets/images/logo-dark.png') }}" class="logo-lg h-[22px]" alt="Dark logo">
-                <img src="{{ asset('build/assets/images/logo-sm.png') }}" class="logo-sm h-[22px]" alt="Small logo">
+                <img src="{{ asset('images/logo-dark.png') }}" class="logo-lg h-[22px]" id alt="Dark logo">
+                <img src="{{ asset('images/logo-sm.png') }}" class="logo-sm h-[22px]" id="logo-light-sm" alt="Small logo">
             </div>
         </a>
 
@@ -66,7 +66,7 @@ new class extends Component
         <!-- Profile Dropdown Button -->
         <div class="relative">
             <button data-fc-type="dropdown" data-fc-placement="bottom-end" type="button" class="nav-link flex items-center gap-2.5 px-3 bg-black/5 border-x border-black/10">
-                <img src="{{ asset('build/assets/images/users/avatar-1.jpg') }}" alt="user-image" class="rounded-full h-8">
+                <img src="{{ asset('images/users/avatar-1.jpg') }}" alt="user-image" class="rounded-full h-8">
                 <span class="md:flex flex-col gap-0.5 text-start hidden">
                     <h5 class="text-sm" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></h5>
                     <span class="text-xs">Member</span>

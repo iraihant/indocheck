@@ -3,6 +3,8 @@ import 'simplebar/dist/simplebar.css';
 import Swal from 'sweetalert2';
 
 
+
+
 document.addEventListener('Notifier', event => {
     Swal.fire({
         title: event.detail.title,
@@ -15,9 +17,6 @@ document.addEventListener('Notifier', event => {
 
 
 class App {
-
-
-
     initSidenav() {
         let pageUrl = window.location.href.split(/[?#]/)[0];
         document.querySelectorAll('ul.menu a.menu-link').forEach((element) => {
@@ -213,7 +212,7 @@ document.addEventListener('livewire:navigated', async () => {
     const app = new App()
     themeCustomizer.init();
     app.init();
-
+    
 });
 
 

@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css','resources/css/icons.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="flex wrapper min-h-screen">
@@ -28,7 +28,7 @@
 
         </div>
         <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-        <script src="{{ asset('build/assets/@frostui/tailwindcss/dist/frostui.js') }}"></script>
+        <script src="{{ asset('@frostui/tailwindcss/dist/frostui.js') }}"></script>
 
     </body>
 </html>

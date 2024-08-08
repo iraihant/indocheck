@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-// Route::view('dashboard', 'dashboard')
-//     ->middleware(['auth', 'verified'])
-//     ->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
@@ -15,9 +12,9 @@ Route::get('dashboard', App\Livewire\Dashboard::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::view('/transaction/deposit', 'transaksi.deposit')->name('trans_depo');
-Route::view('/transaction/{trx_id}/payment', 'transaksi.payment')->name('trans_payment');
 
+Route::get('/transaction/deposit', App\Livewire\transaction\Deposit::class)->name('trans_depo');
+Route::get('/transaction/{trx_id}/payment', App\Livewire\transaction\Payment::class)->name('trans_payment');
 
 
 Route::view('card-check/stripe/gate-1', 'gate1')->name('gate1');

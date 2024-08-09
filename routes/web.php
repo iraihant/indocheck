@@ -13,23 +13,31 @@ Route::get('dashboard', App\Livewire\Dashboard::class)
     ->name('dashboard');
 
 
-Route::get('/transaction/deposit', App\Livewire\transaction\Deposit::class)->name('trans_depo');
-Route::get('/transaction/{trx_id}/payment', App\Livewire\transaction\Payment::class)->name('trans_payment');
-Route::get('/transaction/history', App\Livewire\transaction\History::class)->name('trans_history');
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/transaction/deposit', App\Livewire\transaction\Deposit::class)->name('trans_depo');
+    Route::get('/transaction/{trx_id}/payment', App\Livewire\transaction\Payment::class)->name('trans_payment');
+    Route::get('/transaction/history', App\Livewire\transaction\History::class)->name('trans_history');
 
 
-Route::view('card-check/stripe/gate-1', 'gate1')->name('gate1');
+    Route::view('card-check/stripe/gate-1', 'gate1')->name('gate1');
 
 
 
 
-// ADMIN
+    // ADMIN
 
-Route::name('admin.')->prefix('admin')->group(function () {
-    Route::get('voucher', App\Livewire\admin\Vouchers::class)->name('voucher');
-    // Route::view('service', 'admin-service')->name('service');
-    Route::get('services', App\Livewire\Admin\Service::class)->name('service');
+    Route::name('admin.')->prefix('admin')->group(function () {
+        Route::get('voucher', App\Livewire\Admin\Vouchers::class)->name('voucher');
+        Route::get('services', App\Livewire\Admin\Service::class)->name('service');
+        Route::get('transaction', App\Livewire\Admin\Transaksi::class)->name('transaksi');
+
+
+
+    });
 });
+
+
 
 
 

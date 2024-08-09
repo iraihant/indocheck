@@ -51,29 +51,18 @@
 
                                 </tr>
                                 @empty
-                                    <tr>
-                                        <td>Not Found</td>
+                                    <tr colspan='5' class="text-center">
+                                        <td>Not Found Transaction</td>
                                     </tr>
                                 @endforelse
-                                 {{-- @foreach ($vouchers as $voc)
-                                 <tr>
-                                     <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> @php
-                                         $timestamp = strtotime($voc->created_at);
-                                         $date_formatted = date("D, d M Y", $timestamp);
-                                         @endphp
-                                 {{ $date_formatted }}</td>
-                                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $voc->voucher->code }}</td>
-                                     <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-200">{{ $voc->voucher->metadata['credits'] }} Credits</td>
-
-                                 </tr>
-                                 @endforeach --}}
+                               
 
 
 
                              </tbody>
                          </table>
                          <div class="mt-4">
-                             {{-- {{ $vouchers->links() }} <!-- Pagination links --> --}}
+                             {{ $trans->links() }}
                          </div>
                      </div>
                  </div>
@@ -82,5 +71,5 @@
           </div>
 
         </div>
-     </div>
+    </div>
 </div>

@@ -71,28 +71,28 @@
         <div class="w-full lg:w-1/2 md:w-1/2">
             <div class="card mt-4">
                 <div class="p-6">
-                    <h5>Notes :</h5>
-                    <ul class="list-inside mt-2 dark:text-white" style="list-style-type: disc;">
-                        <li>Payment in IDR should match the total amount.</li>
-                        <li>The confirmation process will be automatic and take 1-2 minutes.</li>
-                        <li>To expedite processing, upload the proof of payment.</li>
-                        {{-- <li>Saldo yang masuk di akun adalah rupiah.</li> --}}
-                    </ul>
-                    <div class="mt-7">
-                        <form wire:submit='save' class="block" method="POST" enctype="multipart/form-data">
-                            @if ($photo)
-                            <img src="{{ $photo->temporaryUrl() }}" class="h-52 w-48 mb-5">
+                    <h5 class="card-title dark:text-white">Payment Proof :</h5>
+                    <div class="flex flex-col">
+                        @if ($trans->proof_of_payment != null)
+                        <div class="justify-self-center mt-5">
+                            
+                            <img src="{{ $trans->proof_of_payment }}" class="h-52 w-48 mb-5">
+                        
+                        </div>
+                        @else
+                        <div class=" justify-self-center mt-5">
+                            
+                            <p>Bukti Belum Di Upload, Silahkan Cek Mutasi Rekening Anda</p>
+                        
+                        </div>
                         @endif
-                            <label for="formFile" class="form-label">Proof Of Payment (opsional)</label>
-                            <input wire:model='photo' class="block w-full mt-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
-
-                            <div class="mt-3 flex justify-between">
-                                <button type="submit" class="btn bg-primary text-white" wire:loading.attr='disabled'>Submit</button>
+                        <div class="mt-1">
+                            <div class="mt-3 flex gap-3">
+                                <button type="button" wire:click='submit' class="btn bg-primary text-white" wire:loading.attr='disabled'>Submit</button>
                                 <button type="button" wire:click='cancelPayment' class="justify-self-end btn bg-danger text-white" wire:loading.attr='disabled'>Cancel Payment</button>
                             </div>
-
-                        </form>
-
+    
+                        </div>
                     </div>
                 </div>
             </div>

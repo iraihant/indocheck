@@ -20,7 +20,7 @@ class Payment extends Component
 
     function mount(){
         $this->trxID = request()->route('trx_id');
-        $transaksiCheck = Transaction::where('transactions_id', $this->trxID)->exists();
+        $transaksiCheck = Transaction::where('transactions_id', $this->trxID)->where('user_id', Auth::id())->exists();
         if(!$transaksiCheck){
             abort(404);
         }
@@ -32,6 +32,7 @@ class Payment extends Component
             $path = $this->photo->store(path: 'photos');
             $trans = Transaction::where('transactions_id', $this->trxID)
                              ->where('status', 0)
+                             ->where('user_id', Auth::id())
                              ->first();
 
             if ($trans) {
@@ -62,6 +63,7 @@ class Payment extends Component
     public function cancelPayment(){
         $trans = Transaction::where('transactions_id', $this->trxID)
                              ->where('status', 0)
+                             ->where('user_id', Auth::id())
                              ->first();
 
         if ($trans) {

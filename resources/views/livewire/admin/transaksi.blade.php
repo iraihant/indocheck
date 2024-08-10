@@ -58,7 +58,7 @@
                             
                                                                 @endphp
                                                                 {{ $rupiah }}</td>
-                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> <a href="{{ route('trans_payment', $pen->transactions_id) }}" wire:navigate class="btn bg-info text-white"><i class="ri-external-link-line mr-2"></i>Details</a></td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> <a href="{{ route('admin.transaksiDetail', $pen->transactions_id) }}" wire:navigate class="btn bg-info text-white"><i class="ri-external-link-line mr-2"></i>Details</a></td>
 
 
 
@@ -113,7 +113,7 @@
                             
                                                                 @endphp
                                                                 {{ $rupiah }}</td>
-                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> <a href="{{ route('trans_payment', $succ->transactions_id) }}" wire:navigate class="btn bg-info text-white"><i class="ri-external-link-line mr-2"></i>Details</a></td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> <a href="{{ route('admin.transaksiDetail', $succ->transactions_id) }}" wire:navigate class="btn bg-info text-white"><i class="ri-external-link-line mr-2"></i>Details</a></td>
 
 
 
@@ -168,7 +168,7 @@
                             
                                                                 @endphp
                                                                 {{ $rupiah }}</td>
-                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> <a href="{{ route('trans_payment', $fail->transactions_id) }}" wire:navigate class="btn bg-info text-white"><i class="ri-external-link-line mr-2"></i>Details</a></td>
+                                    <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-200"> <a href="{{ route('admin.transaksiDetail', $fail->transactions_id) }}" wire:navigate class="btn bg-info text-white"><i class="ri-external-link-line mr-2"></i>Details</a></td>
 
 
 

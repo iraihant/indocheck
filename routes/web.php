@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('voucher', App\Livewire\Admin\Vouchers::class)->name('voucher');
         Route::get('services', App\Livewire\Admin\Service::class)->name('service');
         Route::get('transaction', App\Livewire\Admin\Transaksi::class)->name('transaksi');
+        Route::get('transaction/{trx_id}/details', App\Livewire\Admin\TransaksiDetail::class)->name('transaksiDetail');
+
 
 
 

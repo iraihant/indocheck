@@ -64,6 +64,6 @@ class Service extends Component
         $serviceData = ServiceModel::orderBy('service_name', 'asc')->paginate(10);
         return view('livewire.admin.service', [
             'service' => $serviceData
-        ])->layout('layouts.app');;
+        ])->layout('layouts.app');
     }
 }

@@ -79,6 +79,6 @@ class TransaksiDetail extends Component
         $trans = Transaction::where('transactions_id', $this->trxID)->where('user_id', Auth::id())->firstOrFail();
         return view('livewire.admin.transaksi-detail', [
             'trans' => $trans,
-        ])->layout('layouts.app');;
+        ])->layout('layouts.app');
     }
 }

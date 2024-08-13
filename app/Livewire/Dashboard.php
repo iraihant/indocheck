@@ -20,7 +20,9 @@ class Dashboard extends Component
         try{
 
             $this->validate();
+            // dd($this->voucher);
             $voc = Voucher::where('code', $this->voucher)->firstOrFail();
+            // dd($voc);
             try {
                 Vouchers::redeem($this->voucher, Auth::user(), $voc->metadata);
                 $user = Auth::user();

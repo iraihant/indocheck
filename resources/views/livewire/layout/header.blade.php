@@ -84,6 +84,16 @@
                 </li>
 
                 <li class="menu-title">Admin Area</li>
+                <li class="menu-item">
+                    <a href="{{ route('admin.users') }}" wire:navigate class="menu-link">
+                        <span class="menu-icon">
+                            <i class="ri-home-4-line"></i>
+                        </span>
+                        <span class="menu-text"> Users </span>
+
+                    </a>
+
+                </li>
 
                 <li class="menu-item">
                     <a href="{{ route('admin.transaksi') }}" wire:navigate class="menu-link">

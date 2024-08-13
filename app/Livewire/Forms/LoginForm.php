@@ -29,6 +29,15 @@ class LoginForm extends Form
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+        
+        $user = \App\Models\User::where('name', $this->name)->first();
+
+        // Tambahkan pengecekan apakah pengguna diblokir
+        if ($user && $user->isBanned()) {
+            throw ValidationException::withMessages([
+                'form.name' => 'Your account has been banned.',
+            ]);
+        }
 
         if (! Auth::attempt($this->only(['name', 'password']), $this->remember)) {
             RateLimiter::hit($this->throttleKey());

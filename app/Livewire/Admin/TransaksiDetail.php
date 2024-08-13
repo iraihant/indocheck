@@ -21,10 +21,10 @@ class TransaksiDetail extends Component
             abort(404);
         }
     }
+
     public function submit() {
         $transaksi = Transaction::where('transactions_id', $this->trxID)
         ->where('status', 0)
-        ->where('user_id', Auth::id())
         ->first();
         if ($transaksi) {
             $transaksi->status = 1;
@@ -76,7 +76,7 @@ class TransaksiDetail extends Component
 
     public function render()
     {
-        $trans = Transaction::where('transactions_id', $this->trxID)->where('user_id', Auth::id())->firstOrFail();
+        $trans = Transaction::where('transactions_id', $this->trxID)->firstOrFail();
         return view('livewire.admin.transaksi-detail', [
             'trans' => $trans,
         ])->layout('layouts.app');

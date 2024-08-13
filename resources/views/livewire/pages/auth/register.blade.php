@@ -37,7 +37,7 @@ new #[Layout('layouts.guest')] class extends Component
                 text: 'Successfully register!, you will be redirected to the dashboard page!',
                 icon: 'success',
             );
-
+            $user->assignRole('member');
             Auth::login($user);
 
             $this->redirect(route('dashboard'));

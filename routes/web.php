@@ -13,7 +13,7 @@ Route::get('dashboard', App\Livewire\Dashboard::class)
     ->name('dashboard');
 
 
-Route::middleware(['auth', 'logout.banned'])->group(function () {
+Route::middleware(['auth', 'logout.banned', 'role:member|admin'])->group(function () {
 
     Route::get('/transaction/deposit', App\Livewire\transaction\Deposit::class)->name('trans_depo');
     Route::get('/transaction/{trx_id}/payment', App\Livewire\transaction\Payment::class)->name('trans_payment');
@@ -28,18 +28,12 @@ Route::middleware(['auth', 'logout.banned'])->group(function () {
 
     // ADMIN
 
-    Route::name('admin.')->prefix('admin')->group(function () {
+    Route::name('admin.')->prefix('admin')->middleware('role:admin')->group(function () {
         Route::get('voucher', App\Livewire\Admin\Vouchers::class)->name('voucher');
         Route::get('services', App\Livewire\Admin\Service::class)->name('service');
         Route::get('transaction', App\Livewire\Admin\Transaksi::class)->name('transaksi');
         Route::get('transaction/{trx_id}/details', App\Livewire\Admin\TransaksiDetail::class)->name('transaksiDetail');
         Route::get('/users', App\Livewire\Admin\Users::class)->name('users');
-
-        
-
-
-
-
     });
 });
 

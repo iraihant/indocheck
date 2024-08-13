@@ -82,7 +82,7 @@
                         </li>
                     </ul>
                 </li>
-
+                @role('admin')
                 <li class="menu-title">Admin Area</li>
                 <li class="menu-item">
                     <a href="{{ route('admin.users') }}" wire:navigate class="menu-link">
@@ -129,7 +129,7 @@
 
                 </li>
 
-
+                @endrole
             </ul>
         </div>
     </div>

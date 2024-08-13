@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 use Mchev\Banhammer\Traits\Bannable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Bannable;
+    use HasFactory, Notifiable, Bannable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

@@ -33,14 +33,14 @@
 
                 </li>
 
-                <li class="menu-item">
+                {{-- <li class="menu-item">
                     <a href="apps-calendar" class="menu-link">
                         <span class="menu-icon">
                             <i class="ri-calendar-event-line"></i>
                         </span>
                         <span class="menu-text"> Card Check </span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="menu-item">
                     <a data-fc-type="collapse" class="menu-link">
                         <span class="menu-icon">

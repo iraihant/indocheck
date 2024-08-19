@@ -41,9 +41,18 @@ new class extends Component
                 <i class="ri-menu-2-fill text-2xl"></i>
             </span>
         </button>
-
-        <!-- Light/Dark Toggle Button -->
         <div class="relative ms-auto">
+            <span class="btn bg-info/95 text-white">Balance : {{  Auth::user()->balance }}</span>
+            {{-- <button id="light-dark-mode" type="button" class="nav-link p-2">
+                <span class="sr-only">Light/Dark Mode</span>
+                <span class="flex items-center justify-center">
+                    <i class="ri-moon-line text-2xl block dark:hidden"></i>
+                    <i class="ri-sun-line text-2xl hidden dark:block"></i>
+                </span>
+            </button> --}}
+        </div>
+        <!-- Light/Dark Toggle Button -->
+        <div class="md:flex hidden">
             <button id="light-dark-mode" type="button" class="nav-link p-2">
                 <span class="sr-only">Light/Dark Mode</span>
                 <span class="flex items-center justify-center">

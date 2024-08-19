@@ -25,7 +25,7 @@ new #[Layout('layouts.guest')] class extends Component
                 icon: 'success',
             );
             Session::regenerate();
-    
+
             $this->redirectIntended(default: route('dashboard'));
         } catch (\Exception $e) {
             $this->dispatch('Notifier',
@@ -33,9 +33,9 @@ new #[Layout('layouts.guest')] class extends Component
             text: $e->validator->errors()->all(),
             icon: 'error',);
         }
-       
 
-        
+
+
     }
 }; ?>
 
@@ -240,7 +240,7 @@ new #[Layout('layouts.guest')] class extends Component
                                 <div class="flex justify-between items-center mb-2">
                                     <label for="password" class="font-semibold text-gray-500">Password</label>
                                     @if (Route::has('password.request'))
-                                    <a href="auth-recoverpw.html" class="text-muted text-xs underline decoration-dashed underline-offset-4">Forgot your password?</a>
+                                    <a href="{{ Route('password.request') }}" wire:navigate class="text-muted text-xs underline decoration-dashed underline-offset-4">Forgot your password?</a>
                                     @endif
                                 </div>
 

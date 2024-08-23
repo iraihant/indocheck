@@ -28,13 +28,13 @@
                 <div>
                     <div class="grid grid-cols-10">
                         <span class="text-white px-4 inline-flex items-center min-w-fit rounded-l border border-r-0 border-gray-200 bg-gray-500 text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400">Delim</span>
-                        <input type="text" class="form-input rounded-l-none" value="|">
+                        <input type="text" class="form-input rounded-l-none" id="delim" value="|">
                     </div>
                 </div>
                 <div>
                     <input id="gate" value="gate-1" type="hidden">
-                    <button type="button" class="btn bg-primary text-white" id="start">Start</button>
-                    <button type="button" class="btn bg-danger text-white" id="stop" disabled>Stop</button>
+                    <button type="button" class="btn bg-primary text-white" id="start-check">Start</button>
+                    <button type="button" class="btn bg-danger text-white" id="stop-check" disabled>Stop</button>
 
                 </div>
             </div>
@@ -66,13 +66,13 @@
 
                 <div class="mt-3 overflow-hidden">
                     <div id="tabs-with-underline-1" class="fc-tab-active:opacity-100 opacity-0 transition-all duration-300 transform active scrollbar overflow-auto" style="height: 300px;" role="tabpanel" aria-labelledby="tabs-with-underline-item-1" data-simplebar>
-                        <p class="text-gray-500 dark:text-gray-400">
+                        <p class="text-gray-500 dark:text-gray-400" id="res_live">
 
                         </p>
                     </div> <!-- tabs-with-underline-1 end -->
 
                     <div id="tabs-with-underline-2" class="fc-tab-active:opacity-100 transition-all duration-300 transform opacity-0 hidden scrollbar overflow-auto" style="height: 300px;" role="tabpanel" aria-labelledby="tabs-with-underline-item-2" data-simplebar>
-                        <p class="text-gray-500 dark:text-gray-400">
+                        <p class="text-gray-500 dark:text-gray-400" id="res_die">
                             Tailwind Elements simplifies the process of adding a dark mode to your project.
                             By utilizing Tailwind's classes and a dark variant, you can effortlessly
                             integrate a dual-themed website. Our components come equipped with the dark
@@ -84,7 +84,7 @@
                     </div> <!-- tabs-with-underline-2 end -->
 
                     <div id="tabs-with-underline-3" class="fc-tab-active:opacity-100 transition-all duration-300 transform opacity-0 hidden scrollbar overflow-auto" style="height: 300px;"  role="tabpanel" aria-labelledby="tabs-with-underline-item-3" data-simplebar>
-                        <p class="text-gray-500 dark:text-gray-400">
+                        <p class="text-gray-500 dark:text-gray-400" id="res_unkw">
                             Tailwind CSS offers a seamless way to build modern websites without having to
                             leave your HTML. The framework functions by scanning all of your HTML files,
                             JavaScript components, and templates for class names, automatically generating

@@ -22,7 +22,7 @@ Route::middleware(['auth', 'logout.banned', 'role:member|admin'])->group(functio
 
 
     Route::get('card-check/stripe/gate-1', App\Livewire\CardCheck\Gate1::class)->name('gate1');
-
+    Route::post('/card-check/gate-1/check', [App\Http\Controllers\CardCheck\gate1::class, 'card_gate1_check']);
 
 
 

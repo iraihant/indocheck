@@ -347,7 +347,7 @@ class CheckedGate1Card{
         });
     }
 
-    ExecuteNya(card, mp, no){
+    async ExecuteNya(card, mp, no){
         if(card.length<1 || mp>=card.length){
             this.stopLoading(true, false);
             return false;
@@ -362,49 +362,63 @@ class CheckedGate1Card{
         var data = new URLSearchParams();
         data.append('ajax', '1');
         data.append('do', 'check');
-        data.append('data', encodeURIComponent(card[mp]));
-        data.append('delim', encodeURIComponent(delim));
+        data.append('data', card[mp]);
+        data.append('delim', '|');
+
+        let ulang = true;
+        while (ulang) {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/card-check/gate-1/check', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: data.toString()
+                });
+                const result = await response.json();
+
+                switch (result.error) {
+                    case -1:
+                        ulang = false;
+                        mp++;
+                        resUnkwElement.innerHTML += result.msg + '<br />';
+                        // count_unkUp();
+                        break;
+                    case 1:
+                        ulang = false;
+                        mp++;
+                        resDieElement.innerHTML += result.msg + '<br />';
+                        // yourCreditsElement.textContent = result.bal;
+                        // count_dieUp();
+                        break;
+                    case 5:
+                        ulang = false;
+                        stopLoading(false, true, result.msg); // pastikan `stopLoading` ada dalam konteks
+                        return;
+                    case 0:
+                        ulang = false;
+                        mp++;
+                        resApproveElement.innerHTML += result.msg + '<br />';
+                        // yourCreditsElement.textContent = result.bal;
+                        // count_liveUp();
+                        break;
+                    default:
+                        console.error('Unhandled error case:', result.error);
+                        ulang = false;
+                        break;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                ulang = false; // Pertimbangkan untuk menambahkan logika retry atau penanganan yang lebih baik
+            }
+        }
+
+        no++;
+        await this.ExecuteNya(card, mp, delim, no);
 
     // Permintaan menggunakan fetch
-    fetch('https://indocheck.vip/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: data.toString()
-    })
-    .then(response => response.json())
-    .then(data => {
-        switch (data.error) {
-            case -1:
-                mp++;
-                resUnkwElement.innerHTML += data.msg + '<br />';
-                count_unkUp();
-                break;
-            case 2:
-                mp++;
-                resDieElement.innerHTML += data.msg + '<br />';
-                // yourCreditsElement.textContent = data.bal;
-                count_dieUp();
-                break;
-            case 5:
-                this.stopLoading(false, true, data.msg);
-                return;
-            case 0:
-                mp++;
-                resApproveElement.innerHTML += data.msg + '<br />';
-                // yourCreditsElement.textContent = data.bal;
-                count_liveUp();
-                break;
-        }
-        no++;
-        this.ExecuteNya(card, mp, delim, no);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        this.stopLoading(false, false);
-    });
+    
         // this.ExecuteNya(card, mp, no);
     }
     

@@ -36,11 +36,11 @@ class gate1 extends Controller
         }else{
             while (true) {
                 try {
-                    $response = Http::timeout(60)->get('https://api.indocheck.vip/card/gate-1/check?card='.$req->data.'&user='.Auth::user()->username);
+                    $response = Http::timeout(60)->get('https://api-cc.indocheck.vip/card/stsecure.php?card='.$req->data);
                     // return $response->json();
                     if($response->ok()){
                         // return $response->json('status');
-                        if($response->json('status') == 0){
+                        if($response->json('error') == "LIVE"){
                             // $user = User::find(Auth::user()->id);
                             // $user->balance = Auth::user()->balance - 2;
                             // $user->save();
@@ -49,12 +49,12 @@ class gate1 extends Controller
                                 'msg' => '<font color=blue><b>LIVE</b></font> - '.$req->data.'  '.$response->json('bin'),
                                 // 'bal' => $user->balance
                             ]);
-                        }else if($response->json('status') == 1){
+                        }else if($response->json('error') == "DIE"){
                             // $user = User::find(Auth::user()->id);
                             // $user->balance = Auth::user()->balance - 1;
                             // $user->save();
                             return response()->json([
-                                'error' => 1,
+                                'error' => 2,
                                 'msg' => '<font color=red><b>DECLINED</b></font> - '.$req->data. ' | Info : '.$response->json('code'),
                                 // 'bin' => $response->json('bin'),
                                 // 'bal' => $user->balance

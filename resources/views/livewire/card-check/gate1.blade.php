@@ -33,8 +33,8 @@
                 </div>
                 <div>
                     <input id="gate" value="gate-1" type="hidden">
-                    <button type="button" class="btn bg-primary text-white" id="start-check">Start</button>
-                    <button type="button" class="btn bg-danger text-white" id="stop-check" disabled>Stop</button>
+                    <button type="button" class="btn bg-primary text-white" id="start">Start</button>
+                    <button type="button" class="btn bg-danger text-white" id="stop" disabled>Stop</button>
 
                 </div>
             </div>
@@ -52,15 +52,15 @@
                 <nav class="flex space-x-3 border-b" aria-label="Tabs">
                     <button data-fc-target="#tabs-with-underline-1" type="button" class="fc-tab-active:font-semibold fc-tab-active:border-primary fc-tab-active:text-primary py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent -mb-px transition-all text-sm whitespace-nowrap text-gray-500 hover:text-primary active">
                         <i class="ri-checkbox-blank-circle-fill text-success"></i>
-                        LIVE (<liveres>0</liveres>)
+                        LIVE (<span id="liveres">0</span>)
                     </button> <!-- button-end -->
                     <button data-fc-target="#tabs-with-underline-2" type="button" class="fc-tab-active:font-semibold fc-tab-active:border-primary fc-tab-active:text-primary py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent -mb-px transition-all text-sm whitespace-nowrap text-gray-500 hover:text-primary">
                         <i class="ri-checkbox-blank-circle-fill text-danger"></i>
-                        DIE (<deadres>0</deadres>)
+                        DIE (<span id="deadres"">0</span>)
                     </button> <!-- button-end -->
                     <button data-fc-target="#tabs-with-underline-3" type="button" class="fc-tab-active:font-semibold fc-tab-active:border-primary fc-tab-active:text-primary py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent -mb-px transition-all text-sm whitespace-nowrap text-gray-500 hover:text-primary">
                         <i class="ri-checkbox-blank-circle-fill text-secondary"></i>
-                        UNKNOWN (<unknownres>0</unknownres>)
+                        UNKNOWN (<span id="unknownres">0</span>)
                     </button> <!-- button-end -->
                 </nav> <!-- nav-end -->
 
@@ -103,3 +103,7 @@
 
     </div>
 </div>
+
+@livewireScripts
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+@vite('resources/js/check.js')

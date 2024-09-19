@@ -55,8 +55,8 @@ class gate1 extends Controller
                             // $user->save();
                             return response()->json([
                                 'error' => 2,
-                                'msg' => '<font color=red><b>DECLINED</b></font> - '.$req->data. ' | Info : '.$response->json('code'),
-                                // 'bin' => $response->json('bin'),
+                                'msg' => '<font color=red><b>DECLINED</b></font> - '.$req->data.'  '.$response->json('bin').' | Info : '.$response->json('msg'),
+                                'bin' => $response->json('bin'),
                                 // 'bal' => $user->balance
                             ]);
                             // return 'DIE';

@@ -110,7 +110,7 @@ function ExecuteNya(card, curMP, delim, no){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         beforeSend: function (e) {
-            updateTitle('['+no+'/'+card.length+']  Checking - 16Digits');
+            updateTitle('['+no+'/'+card.length+']  Checking - INDOCHECK');
             var str = $('#checkStatus').html();
             $('#checkStatus').html(str.replace('Stopped','Checking')).removeClass('bg-danger').addClass('bg-success');
             // $('#loading').attr('src', 'https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif');

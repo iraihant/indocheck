@@ -42,7 +42,7 @@ new class extends Component
             </span>
         </button>
         <div class="relative ms-auto">
-            <span class="btn bg-info/95 text-white">Balance : {{  Auth::user()->balance }}</span>
+            <span class="btn bg-info/95 text-white">Balance : <span id="your_credits">{{  Auth::user()->balance }}</span></span>
             {{-- <button id="light-dark-mode" type="button" class="nav-link p-2">
                 <span class="sr-only">Light/Dark Mode</span>
                 <span class="flex items-center justify-center">

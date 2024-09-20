@@ -2,18 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
-
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
-Route::get('dashboard', App\Livewire\Dashboard::class)
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('/',function () {
+//     return redirect('/login');
+// });
+// Route::view('profile', 'profile')
+//     ->middleware(['auth'])
+//     ->name('profile');
+// Route::get('dashboard', App\Livewire\Dashboard::class)
+//     ->middleware(['auth', 'verified'])
+    
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 
 Route::middleware(['auth', 'logout.banned', 'role:member|admin'])->group(function () {
+    Route::get('dashboard', App\Livewire\Dashboard::class)->name('dashboard');
 
     Route::get('/transaction/deposit', App\Livewire\transaction\Deposit::class)->name('trans_depo');
     Route::get('/transaction/{trx_id}/payment', App\Livewire\transaction\Payment::class)->name('trans_payment');

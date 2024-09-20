@@ -61,8 +61,8 @@ function resetResult() {
 }
 function stopLoading(bool, bool2, msg){
     // $('#loading').attr('src', '');
-    // var str = $('#checkStatus').html();
-    // $('#checkStatus').html(str.replace('Checking','Stopped')).removeClass('bg-success').addClass('bg-danger');
+    var str = $('#checkStatus').html();
+    $('#checkStatus').html(str.replace('Checking','Stopped')).removeClass('bg-success').addClass('bg-danger');
     enableTextArea(false);
     $('#start').attr('disabled', false);
     $('#stop').attr('disabled', true);
@@ -111,21 +111,25 @@ function ExecuteNya(card, curMP, delim, no){
         },
         beforeSend: function (e) {
             updateTitle('['+no+'/'+card.length+']  Checking - 16Digits');
-            // var str = $('#checkStatus').html();
-            // $('#checkStatus').html(str.replace('Stopped','Checking')).removeClass('bg-danger').addClass('bg-success');
+            var str = $('#checkStatus').html();
+            $('#checkStatus').html(str.replace('Stopped','Checking')).removeClass('bg-danger').addClass('bg-success');
             // $('#loading').attr('src', 'https://cdn.pixabay.com/animation/2023/03/20/02/45/02-45-27-186_512.gif');
         },
         data: 'ajax=1&do=check&data='+encodeURIComponent(card[curMP])
                 +'&delim='+encodeURIComponent(delim),
         success: function(data) {
             switch(data.error){
+                case -2:
+                    break;
                 case -1:
                     curMP++;
+                    no++;
                     $('#res_unkw').append(data.msg+'<br />');
                     count_unkUp();
                     break;
                 case 2:
                     curMP++;
+                    no++;
                     $('#res_die').append(data.msg+'<br />');
                     $('#your_credits').text(data.bal);
                     count_dieUp();
@@ -135,12 +139,13 @@ function ExecuteNya(card, curMP, delim, no){
                     return false;
                 case 0:
                     curMP++;
+                    no++;
                     $('#res_live').append(data.msg+'<br />');
                     $('#your_credits').text(data.bal);
                     count_liveUp();
                     break;
             }
-            no++;
+           
             ExecuteNya(card, curMP, delim, no);
         }
     });

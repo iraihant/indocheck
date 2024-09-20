@@ -36,30 +36,39 @@ class gate1 extends Controller
         }else{
             while (true) {
                 try {
-                    $response = Http::timeout(60)->get('https://api-cc.indocheck.vip/card/stsecure.php?card='.$req->data);
-                    // return $response->json();
+                    $response = Http::withHeaders([
+                        'Connection' => 'Keep-Alive',
+                        'content-type' => 'text/html; charset=UTF-8',
+                    ])->timeout(60)->get('https://duniahewan.com/card/gate1/stsecure.php?card='.$req->data);
                     if($response->ok()){
                         // return $response->json('status');
                         if($response->json('error') == "LIVE"){
-                            // $user = User::find(Auth::user()->id);
-                            // $user->balance = Auth::user()->balance - 2;
-                            // $user->save();
+                            $user = User::find(Auth::user()->id);
+                            $user->balance = Auth::user()->balance - 2;
+                            $user->save();
                             return response()->json([
                                 'error' => 0,
                                 'msg' => '<font color=blue><b>LIVE</b></font> - '.$req->data.'  '.$response->json('bin'),
-                                // 'bal' => $user->balance
+                                'bal' => $user->balance
                             ]);
                         }else if($response->json('error') == "DIE"){
-                            // $user = User::find(Auth::user()->id);
-                            // $user->balance = Auth::user()->balance - 1;
-                            // $user->save();
+                            $user = User::find(Auth::user()->id);
+                            $user->balance = Auth::user()->balance - 1;
+                            $user->save();
                             return response()->json([
                                 'error' => 2,
                                 'msg' => '<font color=red><b>DECLINED</b></font> - '.$req->data.'  '.$response->json('bin').' | Info : '.$response->json('msg'),
                                 'bin' => $response->json('bin'),
-                                // 'bal' => $user->balance
+                                'bal' => $user->balance
                             ]);
                             // return 'DIE';
+                        }else if($response->json('error') == "ULANG"){
+                            return response()->json([
+                                'error' => -2,
+                                'msg' => null,
+                                'bin' => null,
+                                // 'bal' => $user->balance
+                            ]);
                         }else{
                             return response()->json([
                                 'error' => -1,

@@ -35,6 +35,7 @@
                     <input id="gate" value="gate-1" type="hidden">
                     <button type="button" class="btn bg-primary text-white" id="start">Start</button>
                     <button type="button" class="btn bg-danger text-white" id="stop" disabled>Stop</button>
+                    <span class="ml-5 px-2 py-2 bg-danger rounded text-white" id="checkStatus">STATUS : Stopped</span>
 
                 </div>
             </div>
@@ -52,15 +53,15 @@
                 <nav class="flex space-x-3 border-b" aria-label="Tabs">
                     <button data-fc-target="#tabs-with-underline-1" type="button" class="fc-tab-active:font-semibold fc-tab-active:border-primary fc-tab-active:text-primary py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent -mb-px transition-all text-sm whitespace-nowrap text-gray-500 hover:text-primary active">
                         <i class="ri-checkbox-blank-circle-fill text-success"></i>
-                        LIVE (<span id="liveres">0</span>)
+                        LIVE (<liveres>0</liveres>)
                     </button> <!-- button-end -->
                     <button data-fc-target="#tabs-with-underline-2" type="button" class="fc-tab-active:font-semibold fc-tab-active:border-primary fc-tab-active:text-primary py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent -mb-px transition-all text-sm whitespace-nowrap text-gray-500 hover:text-primary">
                         <i class="ri-checkbox-blank-circle-fill text-danger"></i>
-                        DIE (<span id="deadres"">0</span>)
+                        DIE (<deadres>0</deadres>)
                     </button> <!-- button-end -->
                     <button data-fc-target="#tabs-with-underline-3" type="button" class="fc-tab-active:font-semibold fc-tab-active:border-primary fc-tab-active:text-primary py-4 px-1 inline-flex items-center gap-2 border-b-2 border-transparent -mb-px transition-all text-sm whitespace-nowrap text-gray-500 hover:text-primary">
                         <i class="ri-checkbox-blank-circle-fill text-secondary"></i>
-                        UNKNOWN (<span id="unknownres">0</span>)
+                        UNKNOWN (<unknownres>0</unknownres>)
                     </button> <!-- button-end -->
                 </nav> <!-- nav-end -->
 
